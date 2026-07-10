@@ -7,6 +7,7 @@ import SmoothScroll from "./SmoothScroll";
 import "./globals.css";
 import "./design-fix.css";
 import "./audience-sales-fix.css";
+import "./button-effects.css";
 
 const inter = Inter({
   subsets: ["latin"],
