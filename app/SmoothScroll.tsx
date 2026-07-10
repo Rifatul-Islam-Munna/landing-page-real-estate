@@ -49,9 +49,9 @@ export default function SmoothScroll() {
 
     const render = () => {
       const distance = target - current;
-      current += distance * 0.085;
+      current += distance * 0.105;
 
-      if (Math.abs(distance) < 0.45) {
+      if (Math.abs(distance) < 0.35) {
         current = target;
         window.scrollTo(0, current);
         isAnimating = false;
@@ -86,7 +86,7 @@ export default function SmoothScroll() {
       if (event.ctrlKey || event.metaKey || hasScrollableParent(event.target, event.deltaY)) return;
 
       event.preventDefault();
-      moveTo(target + event.deltaY * 0.78);
+      moveTo(target + event.deltaY * 0.68);
     };
 
     const onKeyDown = (event: KeyboardEvent) => {

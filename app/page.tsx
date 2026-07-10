@@ -415,7 +415,7 @@ export default function Home() {
               <div className="automation-label automation-right-top">Realtor showing reminders</div>
               <div className="automation-label automation-right-bottom">Reply-based automation stop</div>
               <a className="automation-label automation-bottom" href="#contact">
-                request custom automation
+                Request Custom Automation
               </a>
             </div>
           </div>

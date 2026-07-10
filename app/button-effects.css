@@ -95,18 +95,9 @@
   transform-origin: left;
 }
 
-/* Large sales CTA: the blue arrow capsule expands behind the label. */
+/* Large sales CTA: starts as a right-side blue icon circle, then fills as a pill. */
 .sales-button::before {
-  content: "";
-  position: absolute;
-  top: 8px;
-  bottom: 8px;
-  left: 8px;
-  z-index: -1;
-  width: 78px;
-  border-radius: 999px;
-  background: #1447e6;
-  transition: width 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+  display: none;
 }
 
 .sales-button span {
@@ -120,13 +111,9 @@
 .sales-button:hover,
 .sales-button:focus-visible {
   color: #fff;
+  background: #1447e6;
   border-color: #1447e6;
   box-shadow: 0 20px 46px rgba(20, 71, 230, 0.2);
-}
-
-.sales-button:hover::before,
-.sales-button:focus-visible::before {
-  width: calc(100% - 16px);
 }
 
 .sales-button:hover span,

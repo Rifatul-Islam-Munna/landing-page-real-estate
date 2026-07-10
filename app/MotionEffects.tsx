@@ -6,7 +6,7 @@ import { useReducedMotion } from "motion/react";
 
 type Stoppable = { stop: () => void };
 
-const smoothEase = [0.22, 1, 0.36, 1] as const;
+const smoothEase = [0.16, 1, 0.3, 1] as const;
 
 export default function MotionEffects() {
   const reduceMotion = useReducedMotion();
@@ -54,8 +54,8 @@ export default function MotionEffects() {
       0.12,
       1.55,
     );
-    intro(".hero-copy p", { opacity: [0, 1], y: [20, 0] }, 0.36, 1.35);
-    intro(".hero-buttons", { opacity: [0, 1], y: [16, 0] }, 0.55, 1.25);
+    intro(".hero-copy p", { opacity: [0, 1], y: [18, 0], filter: ["blur(5px)", "blur(0px)"] }, 0.34, 1.35);
+    intro(".hero-buttons", { opacity: [0, 1], y: [14, 0], filter: ["blur(4px)", "blur(0px)"] }, 0.52, 1.25);
     intro(
       ".hero-dashboard",
       { opacity: [0, 1], y: [28, 0], scale: [0.992, 1] },
@@ -75,11 +75,11 @@ export default function MotionEffects() {
       } = {},
     ) => {
       const elements = Array.from(document.querySelectorAll<HTMLElement>(selector));
-      const y = options.y ?? 24;
-      const delayStep = options.delayStep ?? 0.08;
-      const duration = options.duration ?? 1.28;
-      const blur = options.blur ?? 5;
-      const scale = options.scale ?? 0.992;
+      const y = options.y ?? 20;
+      const delayStep = options.delayStep ?? 0.07;
+      const duration = options.duration ?? 1.18;
+      const blur = options.blur ?? 4;
+      const scale = options.scale ?? 0.996;
 
       elements.forEach((element, index) => {
         track(
@@ -116,14 +116,14 @@ export default function MotionEffects() {
     };
 
     reveal(".section-title", { y: 28, delayStep: 0, duration: 1.4, blur: 7 });
-    reveal(".feature-card", { y: 30, delayStep: 0.11, amount: 0.08, duration: 1.35 });
-    reveal(".workflow-row", { y: 24, delayStep: 0.1, amount: 0.1, duration: 1.35 });
-    reveal(".screenshot-frame", { y: 28, delayStep: 0, amount: 0.1, duration: 1.5 });
+    reveal(".feature-card", { y: 24, delayStep: 0.08, amount: 0.08, duration: 1.22 });
+    reveal(".workflow-row", { y: 20, delayStep: 0.08, amount: 0.1, duration: 1.22 });
+    reveal(".screenshot-frame", { y: 22, delayStep: 0, amount: 0.1, duration: 1.36 });
     reveal(".automation-label, .automation-center", {
-      y: 18,
-      delayStep: 0.11,
+      y: 16,
+      delayStep: 0.08,
       amount: 0.12,
-      duration: 1.25,
+      duration: 1.18,
     });
     reveal(".audience-card", { y: 28, delayStep: 0.1, amount: 0.1, duration: 1.35 });
     reveal(".sales-panel", { y: 28, delayStep: 0, amount: 0.14, duration: 1.45 });

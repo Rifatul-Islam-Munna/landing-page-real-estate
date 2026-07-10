@@ -43,9 +43,38 @@ textarea {
 }
 
 .site-shell {
+  position: relative;
   width: 100%;
   overflow: hidden;
   background: #fff;
+}
+
+.site-shell::before,
+.site-shell::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  background: rgba(20, 71, 230, 0.09);
+}
+
+.site-shell::before {
+  top: 0;
+  bottom: 0;
+  left: clamp(96px, 16.4vw, 236px);
+  width: 2px;
+}
+
+.site-shell::after {
+  top: 0;
+  right: clamp(96px, 16.4vw, 236px);
+  bottom: 0;
+  width: 2px;
+}
+
+.site-shell > * {
+  position: relative;
+  z-index: 2;
 }
 
 .page-width {
@@ -150,9 +179,10 @@ textarea {
 .contact-button {
   display: flex;
   align-items: center;
+  flex-direction: row-reverse;
   gap: 13px;
   height: 52px;
-  padding: 5px 18px 5px 6px;
+  padding: 5px 6px 5px 18px;
   border: 1px solid #000;
   border-radius: 40px;
   background: rgba(255, 255, 255, 0.2);
@@ -400,6 +430,25 @@ textarea {
 }
 
 .page-section {
+  position: relative;
+}
+
+.page-section::before,
+.sales-section::before,
+.contact-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  height: 2px;
+  pointer-events: none;
+  background: rgba(20, 71, 230, 0.09);
+}
+
+.sales-section,
+.contact-section {
   position: relative;
 }
 
@@ -800,11 +849,12 @@ textarea {
 }
 
 .automation-bottom {
-  bottom: 0;
+  top: 642px;
+  bottom: auto;
   left: 50%;
   width: 323px;
   transform: translateX(-50%);
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 .automation-center {
@@ -1263,12 +1313,91 @@ textarea {
 }
 
 @media (max-width: 920px) {
+  .site-shell::before,
+.site-shell::after,
+.page-section::before,
+.sales-section::before,
+.contact-section::before {
+    display: none;
+  }
+
   .desktop-navigation {
     display: none;
   }
 
   .mobile-navigation {
     display: block;
+    z-index: 12;
+  }
+
+  .mobile-navigation summary {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(5, 5, 5, 0.14);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.54);
+    box-shadow: 0 12px 30px rgba(37, 58, 100, 0.08);
+  }
+
+  .mobile-navigation summary i {
+    width: 18px;
+    height: 2px;
+    margin: 2px 0;
+    border-radius: 99px;
+    background: #050505;
+    transition:
+      transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.28s ease;
+  }
+
+  .mobile-navigation[open] summary i:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .mobile-navigation[open] summary i:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-navigation[open] summary i:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .mobile-navigation > div {
+    top: 58px;
+    right: 0;
+    width: min(330px, calc(100vw - 28px));
+    gap: 0;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 24px 70px rgba(30, 52, 96, 0.16);
+    backdrop-filter: blur(20px);
+  }
+
+  .mobile-navigation > div a {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 18px;
+    color: #050505;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .mobile-navigation > div a + a {
+    margin-top: 4px;
+  }
+
+  .mobile-navigation > div a:last-child {
+    margin-top: 8px;
+    color: #fff;
+    background: #1447e6;
   }
 
   .hero {
@@ -1338,8 +1467,8 @@ textarea {
     width: 100%;
     height: auto;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
     transform: none;
     margin: 50px 0 0;
   }
@@ -1351,21 +1480,44 @@ textarea {
   .automation-label,
   .automation-center {
     position: static;
-    width: min(100%, 420px);
+    width: 100%;
     transform: none;
     justify-self: center;
   }
 
   .automation-center {
+    width: 180px;
     height: 180px;
+    grid-column: 1 / -1;
   }
 
   .automation-top {
-    order: -2;
+    order: 1;
   }
 
   .automation-center {
-    order: -1;
+    order: 0;
+  }
+
+  .automation-left-top {
+    order: 2;
+  }
+
+  .automation-right-top {
+    order: 3;
+  }
+
+  .automation-left-bottom {
+    order: 4;
+  }
+
+  .automation-right-bottom {
+    order: 5;
+  }
+
+  .automation-bottom {
+    order: 6;
+    grid-column: 1 / -1;
   }
 
   .contact-layout {
@@ -1524,6 +1676,28 @@ textarea {
 
   .screenshot-frame {
     padding: 9px;
+  }
+
+  .automation-section {
+    padding: 84px 0;
+  }
+
+  .automation-diagram {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .automation-label {
+    min-height: 54px;
+    padding: 12px 16px;
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .automation-center {
+    width: 164px;
+    height: 164px;
   }
 
   .audience-card {
