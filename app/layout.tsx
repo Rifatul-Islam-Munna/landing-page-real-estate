@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import MotionEffects from "./MotionEffects";
 import ScreenshotSliderEnhancer from "./ScreenshotSliderEnhancer";
 import "./globals.css";
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body>
         {children}
         <ScreenshotSliderEnhancer />
+        <MotionEffects />
       </body>
     </html>
   );
