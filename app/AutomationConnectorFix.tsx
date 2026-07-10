@@ -4,6 +4,7 @@ import { useLayoutEffect } from "react";
 
 const VIEWBOX_WIDTH = 1120;
 const VIEWBOX_HEIGHT = 700;
+const DIAGRAM_WIDTH = 1121;
 
 type Point = { x: number; y: number };
 
@@ -67,6 +68,24 @@ export default function AutomationConnectorFix() {
       defs.remove();
       return;
     }
+
+    const applyResponsiveScale = () => {
+      const viewportWidth = window.innerWidth;
+
+      if (viewportWidth > 920 && viewportWidth <= 1180) {
+        const availableWidth = Math.max(760, viewportWidth - 24);
+        const scale = Math.min(1, availableWidth / DIAGRAM_WIDTH);
+        const hiddenHeight = VIEWBOX_HEIGHT * (1 - scale);
+
+        diagram.style.transformOrigin = "center top";
+        diagram.style.transform = `scale(${scale})`;
+        diagram.style.marginBottom = `${-hiddenHeight}px`;
+      } else {
+        diagram.style.transform = "";
+        diagram.style.transformOrigin = "";
+        diagram.style.marginBottom = "";
+      }
+    };
 
     const toLocalRect = (element: HTMLElement) => {
       const diagramRect = diagram.getBoundingClientRect();
@@ -213,7 +232,12 @@ export default function AutomationConnectorFix() {
       );
     };
 
-    updatePaths();
+    const refresh = () => {
+      applyResponsiveScale();
+      window.requestAnimationFrame(updatePaths);
+    };
+
+    refresh();
 
     const resizeObserver = new ResizeObserver(updatePaths);
     resizeObserver.observe(diagram);
@@ -221,11 +245,14 @@ export default function AutomationConnectorFix() {
       resizeObserver.observe(element),
     );
 
-    window.addEventListener("resize", updatePaths);
+    window.addEventListener("resize", refresh);
 
     return () => {
       resizeObserver.disconnect();
-      window.removeEventListener("resize", updatePaths);
+      window.removeEventListener("resize", refresh);
+      diagram.style.transform = "";
+      diagram.style.transformOrigin = "";
+      diagram.style.marginBottom = "";
       beamGroup.remove();
       defs.remove();
     };
