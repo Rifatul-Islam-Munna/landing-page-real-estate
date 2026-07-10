@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import AutomationConnectorFix from "./AutomationConnectorFix";
 import MotionEffects from "./MotionEffects";
 import ScreenshotSliderEnhancer from "./ScreenshotSliderEnhancer";
-import WorkflowTracingBeam from "./WorkflowTracingBeam";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,7 +26,6 @@ export default function RootLayout({
       <body>
         {children}
         <ScreenshotSliderEnhancer />
-        <WorkflowTracingBeam />
         <AutomationConnectorFix />
         <MotionEffects />
       </body>
