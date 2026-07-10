@@ -14,10 +14,52 @@ const EXACT_PATHS = [
 export default function AutomationConnectorFix() {
   useLayoutEffect(() => {
     const svg = document.querySelector<SVGSVGElement>(".automation-connectors");
+    const orb = document.querySelector<HTMLElement>(".automation-orb");
+
     if (!svg) return;
 
+    let artwork: HTMLImageElement | null = null;
+
+    if (orb) {
+      orb.querySelector(".automation-orb-image")?.remove();
+
+      artwork = document.createElement("img");
+      artwork.className = "automation-orb-image";
+      artwork.alt = "";
+      artwork.setAttribute("aria-hidden", "true");
+      artwork.decoding = "async";
+      artwork.style.position = "absolute";
+      artwork.style.inset = "0";
+      artwork.style.zIndex = "1";
+      artwork.style.display = "block";
+      artwork.style.width = "100%";
+      artwork.style.height = "100%";
+      artwork.style.objectFit = "cover";
+      artwork.style.objectPosition = "center";
+      artwork.style.borderRadius = "inherit";
+      artwork.style.transform = "scale(1.035)";
+      artwork.style.pointerEvents = "none";
+
+      const pageRelativeUrl = new URL("Rectangle%2020.png", document.baseURI).href;
+      const rootUrl = new URL("/Rectangle%2020.png", window.location.origin).href;
+      let triedRootFallback = false;
+
+      artwork.addEventListener("error", () => {
+        if (!triedRootFallback && artwork) {
+          triedRootFallback = true;
+          artwork.src = rootUrl;
+        }
+      });
+
+      artwork.src = pageRelativeUrl;
+      orb.appendChild(artwork);
+    }
+
     const basePaths = Array.from(svg.querySelectorAll<SVGPathElement>(":scope > path")).slice(0, 6);
-    if (basePaths.length < 6) return;
+    if (basePaths.length < 6) {
+      artwork?.remove();
+      return;
+    }
 
     basePaths.forEach((path, index) => {
       path.classList.add("automation-base-path");
@@ -64,6 +106,7 @@ export default function AutomationConnectorFix() {
     svg.appendChild(beamGroup);
 
     return () => {
+      artwork?.remove();
       beamGroup.remove();
       defs.remove();
     };
