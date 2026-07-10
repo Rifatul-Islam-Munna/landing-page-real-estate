@@ -1,54 +1,5 @@
 @import "../styles.css";
 
 body {
-  font-family: var(--font-inter), Inter, system-ui, sans-serif;
-}
-
-.desktop-nav {
-  display: flex;
-  align-items: center;
-  gap: 72px;
-}
-
-.mobile-nav {
-  display: none;
-  position: relative;
-}
-
-.mobile-nav summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.mobile-nav summary::-webkit-details-marker {
-  display: none;
-}
-
-.mobile-nav summary span {
-  display: block;
-  width: 26px;
-  height: 2px;
-  margin: 5px;
-  background: #111;
-}
-
-.mobile-panel {
-  position: absolute;
-  right: 0;
-  top: 48px;
-  width: 220px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 22px;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: var(--shadow);
-  font-weight: 600;
-}
-
-@media (max-width: 760px) {
-  .desktop-nav { display: none; }
-  .mobile-nav { display: block; }
+  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
 }
