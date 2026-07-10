@@ -2,14 +2,33 @@
 
 html {
   scroll-behavior: smooth;
+  overscroll-behavior-y: none;
 }
 
 body {
   font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
 }
 
+/* Use the supplied Figma header logo without changing the navbar footprint. */
+.brand {
+  position: relative;
+  display: block;
+  width: 255px;
+  height: 42px;
+  flex: 0 0 255px;
+  background: url("/Group%2029042.png") left center / contain no-repeat;
+}
+
+.brand > img,
+.brand > span {
+  display: none !important;
+}
+
 /* Rectangle 20 is the shared cloudy artwork from the Builder design. */
 .feature-card:not(.feature-card-more) .feature-card-inner {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   background-color: #eef3fb;
   background-image: url("/Rectangle%2020.png");
   background-repeat: no-repeat;
@@ -17,8 +36,31 @@ body {
   background-size: cover;
 }
 
+/* Keep every feature icon centered, evenly framed and visually aligned. */
+.feature-icon {
+  flex: 0 0 86px;
+  margin-inline: auto;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 10px 28px rgba(62, 94, 157, 0.04);
+  transform-origin: center;
+}
+
+.feature-card h3 {
+  width: 100%;
+  margin-top: 42px;
+  line-height: 1.12;
+}
+
+.feature-card p {
+  width: 100%;
+  margin-top: 15px;
+  line-height: 1.42;
+}
+
 /* The final feature tile is intentionally solid blue in the Figma design. */
 .feature-card-more .more-card-inner {
+  align-items: center;
   background: #1447e6;
 }
 
@@ -35,6 +77,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.75), 0 18px 46px rgba(49, 82, 150, 0.07);
 }
 
 .automation-orb svg {
@@ -44,10 +87,7 @@ body {
 /* Keep the label perfectly centered in the whole automation circle. */
 .automation-center span {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 2;
   display: grid;
   width: 100%;
@@ -57,6 +97,20 @@ body {
   line-height: 1;
   text-align: center;
   pointer-events: none;
+}
+
+/* Refine the automation heading and diagram spacing without moving its geometry. */
+.section-title-automation h2 {
+  margin-top: 27px;
+  line-height: 1.16;
+}
+
+.automation-diagram {
+  margin-top: 58px;
+}
+
+.automation-label {
+  box-shadow: 0 8px 24px rgba(38, 62, 111, 0.025);
 }
 
 /* All four audience tiles use Rectangle 20 behind their labels. */
@@ -84,12 +138,13 @@ body {
 }
 
 .screenshot-frame img {
-  transition: opacity 0.35s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.48s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transform-origin: center top;
 }
 
 .screenshot-frame img.is-changing {
-  opacity: 0.35;
+  opacity: 0.3;
+  transform: scale(0.997);
 }
 
 .screenshot-dots {
@@ -108,13 +163,13 @@ body {
   background: transparent;
   cursor: pointer;
   opacity: 0.46;
-  transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease,
-    transform 0.28s ease;
+  transition: width 0.48s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease,
+    transform 0.36s ease;
 }
 
 .screenshot-dot-button:hover,
 .screenshot-dot-button:focus-visible {
-  opacity: 0.78;
+  opacity: 0.82;
   transform: translateY(-1px);
   outline: none;
 }
@@ -132,7 +187,57 @@ body {
   object-position: center;
 }
 
-/* Motion helpers only; none of these rules change the Builder layout. */
+/* Use the supplied footer wordmark while preserving the original footer height. */
+.footer-wordmark {
+  display: grid;
+  place-items: center;
+  padding-top: 0;
+  color: transparent !important;
+  background: url("/Mask%20group.png") center / contain no-repeat;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+}
+
+.footer-wordmark span {
+  display: none !important;
+}
+
+/* Existing white connectors stay intact; these beams are visual overlays only. */
+.automation-base-path {
+  vector-effect: non-scaling-stroke;
+}
+
+.automation-beam-group {
+  pointer-events: none;
+}
+
+.automation-connectors .automation-beam-path {
+  fill: none;
+  stroke: url("#automationBeamGradient");
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 90;
+  stroke-dashoffset: 0;
+  filter: url("#automationBeamGlow");
+  vector-effect: non-scaling-stroke;
+  opacity: 0.92;
+  animation-name: automation-beam-flow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: stroke-dashoffset;
+}
+
+@keyframes automation-beam-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+/* Motion helpers only; none of these rules alter document flow. */
 .motion-enhanced .contact-button {
   position: relative;
   overflow: hidden;
@@ -163,13 +268,81 @@ body {
 .motion-enhanced .contact-layout,
 .motion-enhanced .footer-links,
 .motion-enhanced .footer-wordmark,
-.motion-enhanced .footer-bottom {
-  will-change: transform, opacity;
+.motion-enhanced .footer-bottom,
+.motion-enhanced .feature-icon {
+  will-change: transform, opacity, filter;
 }
 
-.motion-enhanced .automation-connectors path {
-  vector-effect: non-scaling-stroke;
-  will-change: stroke-dashoffset, opacity;
+.feature-card,
+.workflow-card,
+.audience-card,
+.sales-panel,
+.screenshot-frame {
+  transition: box-shadow 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.feature-card:hover,
+.workflow-card:hover,
+.audience-card:hover {
+  box-shadow: 0 22px 60px rgba(41, 67, 126, 0.08);
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -8px;
+  left: 0;
+  height: 1.5px;
+  transform: scaleX(0);
+  transform-origin: right;
+  background: #1447e6;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (max-width: 1180px) {
+  .brand {
+    width: 218px;
+    height: 36px;
+    flex-basis: 218px;
+  }
+
+  .feature-card-inner {
+    padding-inline: 24px;
+  }
+}
+
+@media (max-width: 920px) {
+  .automation-diagram {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .brand {
+    width: 178px;
+    height: 30px;
+    flex-basis: 178px;
+  }
+
+  .feature-card h3 {
+    margin-top: 38px;
+  }
+
+  .footer-wordmark {
+    background-size: 96% auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
