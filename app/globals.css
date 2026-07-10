@@ -1,32 +1,11 @@
 @import "../styles.css";
 
-body {
-  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
-/* Supplied header logo artwork. */
-.brand {
-  position: relative;
-  display: block;
-  width: 255px;
-  height: 42px;
-  flex: 0 0 auto;
-}
-
-.brand::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("/Group%2029042.png") center / contain no-repeat;
-}
-
-.brand > img,
-.brand > span {
-  display: none !important;
+body {
+  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
 }
 
 /* Rectangle 20 is the shared cloudy artwork from the Builder design. */
@@ -48,7 +27,7 @@ html {
   display: none;
 }
 
-/* Reuse the supplied cloudy artwork inside the automation hub. */
+/* Reuse the supplied artwork inside the automation hub. */
 .automation-orb {
   position: relative;
   background-color: #eaf1ff;
@@ -65,7 +44,10 @@ html {
 /* Keep the label perfectly centered in the whole automation circle. */
 .automation-center span {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 2;
   display: grid;
   width: 100%;
@@ -96,162 +78,18 @@ html {
   display: none;
 }
 
-/* Supplied wide SaaS artwork behind the workflow. */
-.workflow-section {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.workflow-section::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  top: 225px;
-  left: 50%;
-  width: min(1348px, calc(100% - 28px));
-  aspect-ratio: 1348 / 690;
-  transform: translateX(-50%);
-  background: url("/Rectangle%201.png") center / 100% 100% no-repeat;
-  opacity: 0.88;
-  pointer-events: none;
-  animation: saas-art-drift 22s ease-in-out infinite;
-}
-
-.workflow-section > .page-width {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes saas-art-drift {
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-  50% {
-    transform: translateX(-50%) translateY(-7px) scale(1.003);
-  }
-}
-
-/* Aceternity-style tracing beam for the SaaS workflow. */
-.workflow-list {
-  position: relative;
-}
-
-.workflow-center-line {
-  opacity: 0;
-}
-
-.workflow-tracing-beam {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 18px;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.workflow-tracing-beam svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.workflow-beam-track,
-.workflow-beam-progress {
-  fill: none;
-  vector-effect: non-scaling-stroke;
-  stroke-linecap: round;
-}
-
-.workflow-beam-track {
-  stroke: rgba(255, 255, 255, 0.88);
-  stroke-width: 3;
-}
-
-.workflow-beam-progress {
-  stroke: url("#workflowBeamGradient");
-  stroke-width: 4;
-  filter: url("#workflowBeamGlow");
-  transition: stroke-dashoffset 0.08s linear;
-}
-
-.workflow-beam-head {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.94);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: #1447e6;
-  box-shadow: 0 0 18px rgba(20, 71, 230, 0.62);
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.workflow-row,
-.workflow-card,
-.workflow-number {
-  position: relative;
-  z-index: 3;
-}
-
-/* Automation connector skeleton and slowly travelling beams. */
-.automation-connectors {
-  overflow: visible;
-}
-
-.automation-base-path {
-  vector-effect: non-scaling-stroke;
-  will-change: stroke-dashoffset, opacity;
-}
-
-.automation-beam-group {
-  pointer-events: none;
-}
-
-.automation-beam-path {
-  fill: none;
-  stroke: url("#automationBeamGradient");
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 11 89;
-  stroke-dashoffset: 0;
-  filter: url("#automationBeamGlow");
-  vector-effect: non-scaling-stroke;
-  animation-name: automation-beam-flow;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  will-change: stroke-dashoffset;
-}
-
-@keyframes automation-beam-flow {
-  from {
-    stroke-dashoffset: 0;
-  }
-  to {
-    stroke-dashoffset: -100;
-  }
-}
-
-/* Screenshot carousel: controls use the supplied Rectangle 8865 artwork. */
+/* Screenshot carousel controls retain the supplied Rectangle 8865 artwork. */
 .screenshot-frame {
   overflow: hidden;
 }
 
 .screenshot-frame img {
-  transition: opacity 0.48s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.35s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   transform-origin: center top;
 }
 
 .screenshot-frame img.is-changing {
-  opacity: 0.42;
+  opacity: 0.35;
 }
 
 .screenshot-dots {
@@ -270,13 +108,13 @@ html {
   background: transparent;
   cursor: pointer;
   opacity: 0.46;
-  transition: width 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease,
-    transform 0.36s ease;
+  transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease,
+    transform 0.28s ease;
 }
 
 .screenshot-dot-button:hover,
 .screenshot-dot-button:focus-visible {
-  opacity: 0.82;
+  opacity: 0.78;
   transform: translateY(-1px);
   outline: none;
 }
@@ -294,19 +132,7 @@ html {
   object-position: center;
 }
 
-/* Supplied large footer wordmark artwork. */
-.footer-wordmark {
-  color: transparent !important;
-  background: url("/Mask%20group.png") center / contain no-repeat;
-  font-size: 0 !important;
-  letter-spacing: 0 !important;
-}
-
-.footer-wordmark span {
-  display: none !important;
-}
-
-/* Motion layer helpers. */
+/* Motion helpers only; none of these rules change the Builder layout. */
 .motion-enhanced .contact-button {
   position: relative;
   overflow: hidden;
@@ -326,18 +152,13 @@ html {
   will-change: transform, opacity, filter;
 }
 
-.motion-enhanced .hero-ellipse,
-.motion-enhanced .dashboard-glass img,
-.motion-enhanced .metric-card,
-.motion-enhanced .automation-orb {
-  will-change: transform;
-}
-
-.motion-enhanced .feature-card,
-.motion-enhanced .audience-card,
-.motion-enhanced .workflow-card,
 .motion-enhanced .section-title,
+.motion-enhanced .feature-card,
 .motion-enhanced .workflow-row,
+.motion-enhanced .screenshot-frame,
+.motion-enhanced .automation-label,
+.motion-enhanced .automation-center,
+.motion-enhanced .audience-card,
 .motion-enhanced .sales-panel,
 .motion-enhanced .contact-layout,
 .motion-enhanced .footer-links,
@@ -346,53 +167,9 @@ html {
   will-change: transform, opacity;
 }
 
-.feature-card-inner,
-.audience-card,
-.workflow-card,
-.sales-panel,
-.screenshot-frame {
-  transition: box-shadow 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.feature-card:hover .feature-card-inner,
-.audience-card:hover,
-.workflow-card:hover {
-  box-shadow: 0 20px 52px rgba(38, 67, 130, 0.09);
-}
-
-@media (max-width: 920px) {
-  .workflow-section::before {
-    top: 190px;
-    width: calc(100% - 20px);
-    background-size: cover;
-    opacity: 0.62;
-  }
-
-  .workflow-tracing-beam {
-    left: 34px;
-  }
-
-  .automation-beam-path {
-    display: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .brand {
-    width: 178px;
-    height: 30px;
-  }
-
-  .workflow-section::before {
-    top: 170px;
-    min-height: 620px;
-    opacity: 0.5;
-  }
-
-  .footer-wordmark {
-    min-height: 250px;
-  }
+.motion-enhanced .automation-connectors path {
+  vector-effect: non-scaling-stroke;
+  will-change: stroke-dashoffset, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -407,9 +184,5 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .workflow-beam-progress {
-    stroke-dashoffset: 0 !important;
   }
 }
