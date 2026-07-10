@@ -1,0 +1,34 @@
+/* Final visual corrections: preserve the original Builder geometry. */
+
+.section-title-automation h2 {
+  margin-top: 33px;
+  line-height: 1.2;
+}
+
+.automation-diagram {
+  margin-top: 70px;
+}
+
+.automation-label,
+.automation-orb {
+  box-shadow: none;
+}
+
+/* Keep the animation visible without changing the original white-line design. */
+.automation-connectors .automation-beam-path {
+  stroke-width: 3;
+  opacity: 0.42;
+}
+
+@media (min-width: 921px) and (max-width: 1180px) {
+  .automation-diagram {
+    margin-top: 70px;
+    transform-origin: center top;
+  }
+}
+
+@media (max-width: 920px) {
+  .automation-diagram {
+    margin-top: 50px;
+  }
+}
