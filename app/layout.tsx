@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import AutomationConnectorFix from "./AutomationConnectorFix";
 import MotionEffects from "./MotionEffects";
 import ScreenshotSliderEnhancer from "./ScreenshotSliderEnhancer";
+import SmoothScroll from "./SmoothScroll";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body>
         {children}
         <ScreenshotSliderEnhancer />
+        <SmoothScroll />
         <AutomationConnectorFix />
         <MotionEffects />
       </body>
