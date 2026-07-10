@@ -36,6 +36,10 @@ export default function SmoothScroll() {
     const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
     if (reduceMotion || coarsePointer) return;
 
+    const root = document.documentElement;
+    const previousInlineScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+
     let current = window.scrollY;
     let target = current;
     let frame = 0;
@@ -154,6 +158,7 @@ export default function SmoothScroll() {
 
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
+      root.style.scrollBehavior = previousInlineScrollBehavior;
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onNativeScroll);
