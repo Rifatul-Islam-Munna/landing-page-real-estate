@@ -126,3 +126,77 @@ body {
   object-fit: cover;
   object-position: center;
 }
+
+/* Motion layer helpers. */
+.motion-enhanced .contact-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.motion-enhanced .contact-button-icon {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  will-change: transform;
+}
+
+.motion-enhanced .contact-button > span:last-child {
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+  will-change: transform, opacity, filter;
+}
+
+.motion-enhanced .hero-ellipse,
+.motion-enhanced .dashboard-glass img,
+.motion-enhanced .metric-card,
+.motion-enhanced .section-pill,
+.motion-enhanced .screenshot-frame,
+.motion-enhanced .automation-orb {
+  will-change: transform;
+}
+
+.motion-enhanced .feature-card,
+.motion-enhanced .audience-card {
+  transform-style: preserve-3d;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.motion-enhanced .feature-card-inner,
+.motion-enhanced .audience-art,
+.motion-enhanced .feature-card h3,
+.motion-enhanced .feature-card p,
+.motion-enhanced .audience-card h3 {
+  transform: translateZ(0);
+}
+
+.motion-enhanced .automation-connectors path {
+  vector-effect: non-scaling-stroke;
+  will-change: stroke-dashoffset, opacity;
+}
+
+.motion-enhanced .section-title,
+.motion-enhanced .workflow-row,
+.motion-enhanced .sales-panel,
+.motion-enhanced .contact-layout,
+.motion-enhanced .footer-links,
+.motion-enhanced .footer-wordmark,
+.motion-enhanced .footer-bottom {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
