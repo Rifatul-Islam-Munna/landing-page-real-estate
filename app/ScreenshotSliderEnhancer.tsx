@@ -68,7 +68,7 @@ export default function ScreenshotSliderEnhancer() {
       button.setAttribute("aria-label", `Show screenshot ${index + 1}: ${slide.alt}`);
 
       const artwork = document.createElement("img");
-      artwork.src = "/Rectangle%2020.png";
+      artwork.src = "/Rectangle%208865.png";
       artwork.alt = "";
       artwork.setAttribute("aria-hidden", "true");
 
