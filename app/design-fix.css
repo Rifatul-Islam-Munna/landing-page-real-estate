@@ -130,13 +130,26 @@
   aspect-ratio: 1;
   place-items: center;
   overflow: hidden;
+  isolation: isolate;
   border-radius: 50%;
-  background-color: #dfeaff;
+  background: #dfeaff;
+  box-shadow: none;
+}
+
+.automation-orb::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
   background-image: url("/Rectangle%2020.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  box-shadow: none;
+  transform: scale(1.035);
+  filter: saturate(1.08) contrast(1.04);
+  opacity: 1;
+  pointer-events: none;
 }
 
 .automation-orb svg {
