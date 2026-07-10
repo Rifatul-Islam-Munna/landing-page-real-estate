@@ -14,8 +14,45 @@ export default function AutomationConnectorFix() {
 
     if (!diagram || !svg) return;
 
-    const paths = Array.from(svg.querySelectorAll<SVGPathElement>("path"));
-    if (paths.length < 6) return;
+    const basePaths = Array.from(
+      svg.querySelectorAll<SVGPathElement>(":scope > path:not(.automation-beam-path)"),
+    ).slice(0, 6);
+    if (basePaths.length < 6) return;
+
+    basePaths.forEach((path) => path.classList.add("automation-base-path"));
+
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    defs.setAttribute("data-automation-beam", "true");
+    defs.innerHTML = `
+      <linearGradient id="automationBeamGradient" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+        <stop offset="32%" stop-color="#9dbdff" stop-opacity="0.5" />
+        <stop offset="68%" stop-color="#3d70ff" stop-opacity="1" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+      </linearGradient>
+      <filter id="automationBeamGlow" x="-120%" y="-120%" width="340%" height="340%">
+        <feGaussianBlur stdDeviation="3.2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    `;
+    svg.prepend(defs);
+
+    const beamGroup = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    beamGroup.classList.add("automation-beam-group");
+    svg.appendChild(beamGroup);
+
+    const beamPaths = basePaths.map((_, index) => {
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.classList.add("automation-beam-path");
+      path.setAttribute("pathLength", "100");
+      path.style.animationDelay = `${index * -1.08}s`;
+      path.style.animationDuration = `${7.8 + index * 0.42}s`;
+      beamGroup.appendChild(path);
+      return path;
+    });
 
     const top = diagram.querySelector<HTMLElement>(".automation-top");
     const bottom = diagram.querySelector<HTMLElement>(".automation-bottom");
@@ -26,6 +63,8 @@ export default function AutomationConnectorFix() {
     const center = diagram.querySelector<HTMLElement>(".automation-center");
 
     if (!top || !bottom || !leftTop || !leftBottom || !rightTop || !rightBottom || !center) {
+      beamGroup.remove();
+      defs.remove();
       return;
     }
 
@@ -99,6 +138,11 @@ export default function AutomationConnectorFix() {
       ].join(" ");
     };
 
+    const setPath = (index: number, d: string) => {
+      basePaths[index].setAttribute("d", d);
+      beamPaths[index].setAttribute("d", d);
+    };
+
     const updatePaths = () => {
       if (getComputedStyle(svg).display === "none") return;
 
@@ -125,46 +169,42 @@ export default function AutomationConnectorFix() {
       const upperY = centerY - branchOffset;
       const lowerY = centerY + branchOffset;
 
-      const topStart: Point = { x: centerX, y: centerRect.top };
-      const topEnd: Point = { x: (topRect.left + topRect.right) / 2, y: topRect.bottom };
-      const bottomStart: Point = { x: centerX, y: centerRect.bottom };
-      const bottomEnd: Point = {
+      const topHub: Point = { x: centerX, y: centerRect.top };
+      const topLabel: Point = { x: (topRect.left + topRect.right) / 2, y: topRect.bottom };
+      const bottomHub: Point = { x: centerX, y: centerRect.bottom };
+      const bottomLabel: Point = {
         x: (bottomRect.left + bottomRect.right) / 2,
         y: bottomRect.top,
       };
 
-      paths[0].setAttribute("d", `M ${topStart.x} ${topStart.y} V ${topEnd.y}`);
-      paths[1].setAttribute("d", `M ${bottomStart.x} ${bottomStart.y} V ${bottomEnd.y}`);
-
-      paths[2].setAttribute(
-        "d",
+      setPath(0, `M ${topLabel.x} ${topLabel.y} V ${topHub.y}`);
+      setPath(1, `M ${bottomLabel.x} ${bottomLabel.y} V ${bottomHub.y}`);
+      setPath(
+        2,
         leftPath(
           { x: leftTopRect.right, y: (leftTopRect.top + leftTopRect.bottom) / 2 },
           { x: circleXAtOffset(-branchOffset, "left"), y: upperY },
           true,
         ),
       );
-
-      paths[3].setAttribute(
-        "d",
+      setPath(
+        3,
         leftPath(
           { x: leftBottomRect.right, y: (leftBottomRect.top + leftBottomRect.bottom) / 2 },
           { x: circleXAtOffset(branchOffset, "left"), y: lowerY },
           false,
         ),
       );
-
-      paths[4].setAttribute(
-        "d",
+      setPath(
+        4,
         rightPath(
           { x: rightTopRect.left, y: (rightTopRect.top + rightTopRect.bottom) / 2 },
           { x: circleXAtOffset(-branchOffset, "right"), y: upperY },
           true,
         ),
       );
-
-      paths[5].setAttribute(
-        "d",
+      setPath(
+        5,
         rightPath(
           { x: rightBottomRect.left, y: (rightBottomRect.top + rightBottomRect.bottom) / 2 },
           { x: circleXAtOffset(branchOffset, "right"), y: lowerY },
@@ -186,6 +226,8 @@ export default function AutomationConnectorFix() {
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", updatePaths);
+      beamGroup.remove();
+      defs.remove();
     };
   }, []);
 
