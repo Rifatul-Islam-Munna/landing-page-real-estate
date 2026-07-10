@@ -1,5 +1,9 @@
 @import "../styles.css";
 
+body {
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+}
+
 .desktop-nav {
   display: flex;
   align-items: center;
