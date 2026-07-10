@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import AutomationConnectorFix from "./AutomationConnectorFix";
 import MotionEffects from "./MotionEffects";
 import ScreenshotSliderEnhancer from "./ScreenshotSliderEnhancer";
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body>
         {children}
         <ScreenshotSliderEnhancer />
+        <AutomationConnectorFix />
         <MotionEffects />
       </body>
     </html>
