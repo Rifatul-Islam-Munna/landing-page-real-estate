@@ -132,13 +132,10 @@
   overflow: hidden;
   border-radius: 50%;
   background-color: #dfeaff;
-  background-image:
-    url("/Rectangle%2020.png"),
-    radial-gradient(circle at 38% 30%, #f7faff 0%, #dce9ff 54%, #b8d1ff 100%);
+  background-image: url("/Rectangle%2020.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-blend-mode: multiply, normal;
   box-shadow: none;
 }
 
