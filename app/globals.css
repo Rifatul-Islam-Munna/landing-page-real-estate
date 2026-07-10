@@ -3,3 +3,63 @@
 body {
   font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
 }
+
+/* Rectangle 20 is the shared cloudy artwork from the Builder design. */
+.feature-card:not(.feature-card-more) .feature-card-inner {
+  background-color: #eef3fb;
+  background-image: url("/Rectangle%2020.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* The final feature tile is intentionally solid blue in the Figma design. */
+.feature-card-more .more-card-inner {
+  background: #1447e6;
+}
+
+.feature-card-more .more-card-inner > img,
+.feature-card-more .more-card-inner::after {
+  display: none;
+}
+
+/* Reuse the same supplied artwork inside the automation hub. */
+.automation-orb {
+  position: relative;
+  background-color: #eaf1ff;
+  background-image: url("/Rectangle%2020.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.automation-orb svg {
+  display: none;
+}
+
+.automation-center span {
+  inset: 0;
+  bottom: auto;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+}
+
+/* All four audience tiles use Rectangle 20 behind their labels. */
+.audience-card .audience-art,
+.audience-card-1 .audience-art,
+.audience-card-2 .audience-art,
+.audience-card-3 .audience-art,
+.audience-card-4 .audience-art {
+  background-color: #eef3fb;
+  background-image: url("/Rectangle%2020.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.audience-art::before,
+.audience-art::after,
+.audience-art > span {
+  display: none;
+}
