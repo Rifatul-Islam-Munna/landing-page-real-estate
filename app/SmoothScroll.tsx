@@ -25,6 +25,11 @@ function hasScrollableParent(target: EventTarget | null, deltaY: number) {
   return false;
 }
 
+function isTypingTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false;
+  return Boolean(target.closest("input, textarea, select, [contenteditable='true']"));
+}
+
 export default function SmoothScroll() {
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -68,12 +73,55 @@ export default function SmoothScroll() {
       target = current;
     };
 
+    const moveTo = (nextTarget: number) => {
+      target = clamp(nextTarget, 0, maximumScroll());
+      start();
+    };
+
     const onWheel = (event: WheelEvent) => {
       if (event.ctrlKey || event.metaKey || hasScrollableParent(event.target, event.deltaY)) return;
 
       event.preventDefault();
-      target = clamp(target + event.deltaY * 0.78, 0, maximumScroll());
-      start();
+      moveTo(target + event.deltaY * 0.78);
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || isTypingTarget(event.target)) {
+        return;
+      }
+
+      const pageStep = window.innerHeight * 0.82;
+      let nextTarget: number | null = null;
+
+      switch (event.key) {
+        case "ArrowDown":
+          nextTarget = target + 90;
+          break;
+        case "ArrowUp":
+          nextTarget = target - 90;
+          break;
+        case "PageDown":
+          nextTarget = target + pageStep;
+          break;
+        case "PageUp":
+          nextTarget = target - pageStep;
+          break;
+        case "Home":
+          nextTarget = 0;
+          break;
+        case "End":
+          nextTarget = maximumScroll();
+          break;
+        case " ":
+          nextTarget = target + (event.shiftKey ? -pageStep : pageStep);
+          break;
+        default:
+          break;
+      }
+
+      if (nextTarget === null) return;
+      event.preventDefault();
+      moveTo(nextTarget);
     };
 
     const onNativeScroll = () => {
@@ -93,12 +141,12 @@ export default function SmoothScroll() {
       if (!destination) return;
 
       event.preventDefault();
-      target = clamp(destination.getBoundingClientRect().top + window.scrollY, 0, maximumScroll());
+      moveTo(destination.getBoundingClientRect().top + window.scrollY);
       window.history.pushState(null, "", hash);
-      start();
     };
 
     window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("keydown", onKeyDown);
     window.addEventListener("scroll", onNativeScroll, { passive: true });
     window.addEventListener("resize", onNativeScroll);
     window.addEventListener("mousedown", stop, { passive: true });
@@ -107,6 +155,7 @@ export default function SmoothScroll() {
     return () => {
       if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onNativeScroll);
       window.removeEventListener("resize", onNativeScroll);
       window.removeEventListener("mousedown", stop);
