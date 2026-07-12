@@ -4,26 +4,44 @@ import { useEffect } from "react";
 
 const screenshots = [
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/7e626b670f7efaaef021195d76691b278031ba8e?placeholderIfAbsent=true",
-    alt: "Badal CRM workspace overview",
-    position: "left top",
+    src: "/sliders/Group%2029066.png",
+    alt: "Lead CRM dashboard",
+    position: "center",
     scale: "1",
   },
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/7e626b670f7efaaef021195d76691b278031ba8e?placeholderIfAbsent=true",
-    alt: "Badal CRM lead management workspace",
-    position: "center top",
-    scale: "1.04",
+    src: "/sliders/Group%2029067.png",
+    alt: "Real estate reports dashboard",
+    position: "center",
+    scale: "1",
   },
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/7e626b670f7efaaef021195d76691b278031ba8e?placeholderIfAbsent=true",
-    alt: "Badal CRM follow-up and pipeline workspace",
-    position: "right top",
-    scale: "1.04",
+    src: "/sliders/Group%2029068.png",
+    alt: "Property listings dashboard",
+    position: "center",
+    scale: "1",
   },
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/cbce36f30212c6d8f00700d6674c4ec5b1b1acea?placeholderIfAbsent=true",
-    alt: "Badal CRM complete application view",
+    src: "/sliders/Group%2029069.png",
+    alt: "Property chat workspace",
+    position: "center",
+    scale: "1",
+  },
+  {
+    src: "/sliders/Group%2029070.png",
+    alt: "Lead activity workspace",
+    position: "center",
+    scale: "1",
+  },
+  {
+    src: "/sliders/Group%2029071.png",
+    alt: "Real estate document workspace",
+    position: "center",
+    scale: "1",
+  },
+  {
+    src: "/sliders/Group%2029072.png",
+    alt: "Contact management workspace",
     position: "center",
     scale: "1",
   },
@@ -37,6 +55,7 @@ export default function ScreenshotSliderEnhancer() {
     if (!screenshot || !controls) return;
 
     let activeIndex = 0;
+    let autoplayId = 0;
     const buttons: HTMLButtonElement[] = [];
 
     const showSlide = (index: number) => {
@@ -73,14 +92,24 @@ export default function ScreenshotSliderEnhancer() {
       artwork.setAttribute("aria-hidden", "true");
 
       button.appendChild(artwork);
-      button.addEventListener("click", () => showSlide(index));
+      button.addEventListener("click", () => {
+        window.clearInterval(autoplayId);
+        showSlide(index);
+        autoplayId = window.setInterval(() => {
+          showSlide((activeIndex + 1) % screenshots.length);
+        }, 3600);
+      });
       controls.appendChild(button);
       buttons.push(button);
     });
 
     showSlide(0);
+    autoplayId = window.setInterval(() => {
+      showSlide((activeIndex + 1) % screenshots.length);
+    }, 3600);
 
     return () => {
+      window.clearInterval(autoplayId);
       buttons.forEach((button) => button.replaceWith(button.cloneNode(true)));
     };
   }, []);

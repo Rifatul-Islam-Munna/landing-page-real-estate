@@ -64,6 +64,11 @@ body {
   background: #1447e6;
 }
 
+.feature-card-more .more-card-inner h3 {
+  width: auto;
+  text-align: center;
+}
+
 .feature-card-more .more-card-inner > img,
 .feature-card-more .more-card-inner::after {
   display: none;
@@ -143,8 +148,8 @@ body {
 }
 
 .screenshot-frame img.is-changing {
-  opacity: 0.3;
-  transform: scale(0.997);
+  opacity: 0.16;
+  transform: scale(1.012);
 }
 
 .screenshot-dots {

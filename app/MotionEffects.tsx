@@ -223,7 +223,7 @@ export default function MotionEffects() {
       );
     }
 
-    // Requested contact-button interaction: the text fades while the arrow glides right.
+    // Requested contact-button interaction: reference-style arrow glide with text breathing.
     const contactButton = document.querySelector<HTMLElement>(".contact-button");
     const contactIcon = contactButton?.querySelector<HTMLElement>(".contact-button-icon");
     const contactLabel = contactButton?.querySelector<HTMLElement>("span:last-child");
@@ -232,21 +232,21 @@ export default function MotionEffects() {
       const enter = () => {
         const targetX = Math.max(
           0,
-          contactButton.clientWidth - contactIcon.offsetLeft - contactIcon.offsetWidth - 7,
+          contactButton.clientWidth - contactIcon.offsetLeft - contactIcon.offsetWidth - 10,
         );
 
         track(
           animate(
             contactLabel,
-            { opacity: 0, x: 9, filter: "blur(4px)" },
-            { duration: 0.48, ease: smoothEase },
+            { opacity: 0.62, x: 12, filter: "blur(1.5px)" },
+            { duration: 0.42, ease: smoothEase },
           ),
         );
         track(
           animate(
             contactIcon,
-            { x: targetX, rotate: 45, scale: 1.035 },
-            { type: "spring", stiffness: 145, damping: 22, mass: 0.9 },
+            { x: targetX, scale: 1.05 },
+            { type: "spring", stiffness: 185, damping: 20, mass: 0.78 },
           ),
         );
       };
@@ -262,8 +262,8 @@ export default function MotionEffects() {
         track(
           animate(
             contactIcon,
-            { x: 0, rotate: 0, scale: 1 },
-            { type: "spring", stiffness: 145, damping: 23, mass: 0.92 },
+            { x: 0, scale: 1 },
+            { type: "spring", stiffness: 175, damping: 22, mass: 0.82 },
           ),
         );
       };

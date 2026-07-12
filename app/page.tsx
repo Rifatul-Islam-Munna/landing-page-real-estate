@@ -210,7 +210,7 @@ export default function Home() {
               <a href="#automation">Automation</a>
             </div>
             <a className="contact-button" href="#contact">
-              <span className="contact-button-icon">↗</span>
+              <span className="contact-button-icon" aria-hidden="true" />
               <span>contact us</span>
             </a>
           </div>
@@ -366,8 +366,8 @@ export default function Home() {
 
             <div className="screenshot-frame">
               <img
-                src="https://api.builder.io/api/v1/image/assets/TEMP/7e626b670f7efaaef021195d76691b278031ba8e?placeholderIfAbsent=true"
-                alt="Badal CRM workspace screenshot"
+                src="/sliders/Group%2029066.png"
+                alt="Lead CRM dashboard"
               />
             </div>
 
