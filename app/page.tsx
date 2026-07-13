@@ -507,17 +507,17 @@ export default function Home() {
           <div className="footer-links">
             <a href="#top">About Us</a>
             <a href="#features">Service</a>
-            <a href="#screenshots">Projects</a>
-            <a href="https://github.com/Rifatul-Islam-Munna/landing-page-real-estate" target="_blank" rel="noreferrer">
+            <a href="https://badal.agency" target="_blank" rel="noreferrer">Projects</a>
+            <a href="https://github.com/Rifatul-Islam-Munna" target="_blank" rel="noreferrer">
               Github
             </a>
-            <a href="#top">Portfolio</a>
+            <a href="https://rifatul-islam-portfolio.vercel.app" target="_blank" rel="noreferrer">Portfolio</a>
           </div>
           <div className="footer-wordmark">
             BADAL<span>®</span>
           </div>
           <div className="footer-bottom">
-            <a href="#top">Linkedin</a>
+            <a href="https://www.linkedin.com/in/rifatul-islam-munna" target="_blank" rel="noreferrer">Linkedin</a>
             <p>© 2026 - All rights reserved by Badal and team</p>
             <a href="#top">Back to Top</a>
           </div>
