@@ -223,57 +223,6 @@ export default function MotionEffects() {
       );
     }
 
-    // Requested contact-button interaction: reference-style arrow glide with text breathing.
-    const contactButton = document.querySelector<HTMLElement>(".contact-button");
-    const contactIcon = contactButton?.querySelector<HTMLElement>(".contact-button-icon");
-    const contactLabel = contactButton?.querySelector<HTMLElement>("span:last-child");
-
-    if (contactButton && contactIcon && contactLabel) {
-      const enter = () => {
-        const targetX = Math.max(
-          0,
-          contactButton.clientWidth - contactIcon.offsetLeft - contactIcon.offsetWidth - 10,
-        );
-
-        track(
-          animate(
-            contactLabel,
-            { opacity: 0.62, x: 12, filter: "blur(1.5px)" },
-            { duration: 0.42, ease: smoothEase },
-          ),
-        );
-        track(
-          animate(
-            contactIcon,
-            { x: targetX, scale: 1.05 },
-            { type: "spring", stiffness: 185, damping: 20, mass: 0.78 },
-          ),
-        );
-      };
-
-      const leave = () => {
-        track(
-          animate(
-            contactLabel,
-            { opacity: 1, x: 0, filter: "blur(0px)" },
-            { duration: 0.52, ease: smoothEase },
-          ),
-        );
-        track(
-          animate(
-            contactIcon,
-            { x: 0, scale: 1 },
-            { type: "spring", stiffness: 175, damping: 22, mass: 0.82 },
-          ),
-        );
-      };
-
-      listen(contactButton, "mouseenter", enter);
-      listen(contactButton, "mouseleave", leave);
-      listen(contactButton, "focusin", enter);
-      listen(contactButton, "focusout", leave);
-    }
-
     // Soft depth on cards and buttons, with separate icon choreography.
     document
       .querySelectorAll<HTMLElement>(

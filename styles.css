@@ -86,21 +86,13 @@ textarea {
   position: relative;
   height: 1228px;
   overflow: hidden;
-  background: linear-gradient(180deg, #dfeafd 0%, #eef4ff 42%, #ffffff 100%);
+  background:
+    linear-gradient(180deg, rgba(223, 234, 253, 0.74) 0%, rgba(238, 244, 255, 0.74) 42%, #ffffff 100%),
+    url("/Website%20elements/Ellipse%202.png") center top / 100% 100% no-repeat;
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: 885px 0 0;
-  z-index: 0;
-  background: linear-gradient(
-    181deg,
-    rgba(255, 255, 255, 0.69) 0%,
-    rgba(237, 241, 245, 0.69) 25%,
-    rgba(237, 241, 245, 0.69) 85%,
-    rgba(255, 255, 255, 0.69) 100%
-  );
+  display: none;
 }
 
 .hero-ellipse {
@@ -114,6 +106,7 @@ textarea {
   transform: translateX(-50%);
   border-radius: 50%;
   object-fit: cover;
+  opacity: 0.78;
   pointer-events: none;
 }
 
@@ -177,6 +170,7 @@ textarea {
 
 .contact-button {
   box-sizing: border-box;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -195,36 +189,40 @@ textarea {
   line-height: 1;
   text-align: center;
   text-transform: lowercase;
+  box-shadow: none;
+}
+
+.contact-button > span:last-child {
+  position: relative;
+  order: 2;
+  z-index: 2;
+  white-space: nowrap;
+  transition: color 0.25s ease;
 }
 
 .contact-button-icon {
+  position: relative;
+  order: 1;
+  z-index: 2;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   color: #fff;
   background: var(--blue);
+  transition: background-color 0.25s ease;
 }
 
-.contact-button-icon::before {
-  content: "";
-  width: 18px;
-  height: 3px;
-  border-radius: 999px;
-  background: currentColor;
-}
-
-.contact-button-icon::after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border-top: 3px solid currentColor;
-  border-right: 3px solid currentColor;
-  transform: translateX(4px) rotate(45deg);
+.contact-button-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .mobile-navigation {
@@ -596,14 +594,20 @@ textarea {
   height: 86px;
   margin-inline: auto;
   place-items: center;
-  border-radius: 8px;
+  border: 1px solid rgba(20, 71, 230, 0.12);
+  border-radius: 20px;
   color: var(--blue);
-  background: rgba(255, 255, 255, 0.13);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.58) 58%, rgba(226, 237, 255, 0.74)),
+    #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 16px 34px rgba(20, 71, 230, 0.12);
 }
 
 .feature-icon svg {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
 }
 
 .feature-card h3 {

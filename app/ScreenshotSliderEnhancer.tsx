@@ -59,17 +59,25 @@ export default function ScreenshotSliderEnhancer() {
     const buttons: HTMLButtonElement[] = [];
 
     const showSlide = (index: number) => {
+      const previousIndex = activeIndex;
+      const direction =
+        index === previousIndex ? "next" : index > previousIndex || (previousIndex === screenshots.length - 1 && index === 0) ? "next" : "prev";
       activeIndex = index;
       const slide = screenshots[index];
 
+      screenshot.dataset.direction = direction;
       screenshot.classList.add("is-changing");
       window.setTimeout(() => {
         screenshot.src = slide.src;
         screenshot.alt = slide.alt;
         screenshot.style.objectPosition = slide.position;
-        screenshot.style.transform = `scale(${slide.scale})`;
+        screenshot.style.removeProperty("transform");
         screenshot.classList.remove("is-changing");
-      }, 120);
+        screenshot.classList.add("is-entering");
+        window.setTimeout(() => {
+          screenshot.classList.remove("is-entering");
+        }, 1800);
+      }, 760);
 
       buttons.forEach((button, buttonIndex) => {
         const isActive = buttonIndex === activeIndex;
@@ -97,7 +105,7 @@ export default function ScreenshotSliderEnhancer() {
         showSlide(index);
         autoplayId = window.setInterval(() => {
           showSlide((activeIndex + 1) % screenshots.length);
-        }, 3600);
+        }, 8200);
       });
       controls.appendChild(button);
       buttons.push(button);
@@ -106,7 +114,7 @@ export default function ScreenshotSliderEnhancer() {
     showSlide(0);
     autoplayId = window.setInterval(() => {
       showSlide((activeIndex + 1) % screenshots.length);
-    }, 3600);
+    }, 8200);
 
     return () => {
       window.clearInterval(autoplayId);

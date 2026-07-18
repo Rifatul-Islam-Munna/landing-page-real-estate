@@ -83,7 +83,7 @@ function Icon({ name }: { name: IconName }) {
   const common = {
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.8,
+    strokeWidth: 2.2,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
@@ -91,55 +91,56 @@ function Icon({ name }: { name: IconName }) {
   const paths: Record<IconName, React.ReactNode> = {
     lead: (
       <>
-        <path {...common} d="M8.5 11.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
-        <path {...common} d="M2.5 20c.5-4 2.5-6 6-6s5.5 2 6 6" />
-        <path {...common} d="M17 8v6m-3-3h6" />
+        <path {...common} d="M18 21a8 8 0 0 0-16 0" />
+        <circle {...common} cx="10" cy="8" r="5" />
+        <path {...common} d="M19 8v6m3-3h-6" />
       </>
     ),
     home: (
       <>
-        <path {...common} d="m3 11 9-7 9 7" />
-        <path {...common} d="M5 10v10h14V10" />
-        <path {...common} d="M9 20v-6h6v6" />
+        <path {...common} d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <path {...common} d="M9 22V12h6v10" />
       </>
     ),
     mail: (
       <>
-        <rect {...common} x="3" y="5" width="18" height="14" rx="2" />
-        <path {...common} d="m4 7 8 6 8-6" />
+        <path {...common} d="M22 7 13.5 15.5a2.1 2.1 0 0 1-3 0L2 7" />
+        <rect {...common} x="2" y="5" width="20" height="14" rx="2" />
       </>
     ),
     pipeline: (
       <>
-        <path {...common} d="M4 6h10m-4-3 4 3-4 3" />
-        <path {...common} d="M20 18H10m4-3-4 3 4 3" />
-        <path {...common} d="M6 6v12" />
+        <path {...common} d="M6 3v12" />
+        <circle {...common} cx="18" cy="6" r="3" />
+        <circle {...common} cx="6" cy="18" r="3" />
+        <path {...common} d="M18 9a9 9 0 0 1-9 9" />
       </>
     ),
     calendar: (
       <>
-        <rect {...common} x="3" y="5" width="18" height="16" rx="2" />
-        <path {...common} d="M7 3v4m10-4v4M3 10h18" />
-        <path {...common} d="m8 15 2 2 5-5" />
+        <path {...common} d="M8 2v4m8-4v4" />
+        <rect {...common} x="3" y="4" width="18" height="18" rx="2" />
+        <path {...common} d="M3 10h18m-13 6 2 2 5-5" />
       </>
     ),
     document: (
       <>
-        <path {...common} d="M6 3h8l4 4v14H6z" />
-        <path {...common} d="M14 3v5h5M9 12h6M9 16h6" />
+        <path {...common} d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z" />
+        <path {...common} d="M14 2v4a2 2 0 0 0 2 2h4M10 9H8m8 4H8m8 4H8" />
       </>
     ),
     pdf: (
       <>
-        <path {...common} d="M6 3h8l4 4v14H6z" />
-        <path {...common} d="M14 3v5h5" />
-        <path {...common} d="M8 16h2a2 2 0 0 0 0-4H8v6m5 0v-6h1.5a3 3 0 0 1 0 6H13Zm5-6h3m-3 3h2" />
+        <path {...common} d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <path {...common} d="M14 2v6h6" />
+        <path {...common} d="M8 13h1.5a1.5 1.5 0 0 1 0 3H8v-5m5 5v-5h1.2a2.5 2.5 0 0 1 0 5H13m5-5h3m-3 2h2" />
       </>
     ),
     chart: (
       <>
-        <path {...common} d="M4 20V10m6 10V4m6 16v-7m4 7H2" />
-        <path {...common} d="m4 8 5-4 6 5 5-5" />
+        <path {...common} d="M3 3v18h18" />
+        <path {...common} d="m19 9-5 5-4-4-3 3" />
+        <path {...common} d="M19 9h-5m5 0v5" />
       </>
     ),
     agency: (
@@ -189,7 +190,7 @@ export default function Home() {
   return (
     <div className="site-shell">
       <header className="hero" id="top">
-        <img className="hero-ellipse" src="/Ellipse%201.png" alt="" aria-hidden="true" />
+        <img className="hero-ellipse" src="/Website%20elements/Ellipse%202.png" alt="" aria-hidden="true" />
 
         <nav className="top-nav page-width" aria-label="Primary navigation">
           <a className="brand" href="#top" aria-label="Badal real estate CRM home">
@@ -210,7 +211,12 @@ export default function Home() {
               <a href="#automation">Automation</a>
             </div>
             <a className="contact-button" href="#contact">
-              <span className="contact-button-icon" aria-hidden="true" />
+              <span className="contact-button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </span>
               <span>contact us</span>
             </a>
           </div>

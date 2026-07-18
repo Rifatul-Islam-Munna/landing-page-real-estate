@@ -40,9 +40,14 @@ body {
 .feature-icon {
   flex: 0 0 86px;
   margin-inline: auto;
-  border: 1px solid rgba(255, 255, 255, 0.82);
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 10px 28px rgba(62, 94, 157, 0.04);
+  border: 1px solid rgba(20, 71, 230, 0.14);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.58) 58%, rgba(226, 237, 255, 0.74)),
+    #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 16px 34px rgba(20, 71, 230, 0.12);
   transform-origin: center;
 }
 
@@ -137,59 +142,156 @@ body {
   display: none;
 }
 
-/* Screenshot carousel controls retain the supplied Rectangle 8865 artwork. */
 .screenshot-frame {
   overflow: hidden;
 }
 
 .screenshot-frame img {
-  transition: opacity 0.48s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 1.35s ease,
+    transform 2.35s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.35s ease;
   transform-origin: center top;
+  will-change: opacity, transform, filter;
 }
 
 .screenshot-frame img.is-changing {
-  opacity: 0.16;
-  transform: scale(1.012);
+  opacity: 0.02;
+  filter: blur(8px);
+}
+
+.screenshot-frame img.is-changing[data-direction="next"] {
+  transform: translate3d(-34px, 0, 0) scale(1.026);
+}
+
+.screenshot-frame img.is-changing[data-direction="prev"] {
+  transform: translate3d(34px, 0, 0) scale(1.026);
+}
+
+.screenshot-frame img.is-entering[data-direction="next"] {
+  animation: screenshot-rubber-next 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.screenshot-frame img.is-entering[data-direction="prev"] {
+  animation: screenshot-rubber-prev 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes screenshot-rubber-next {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(48px, 0, 0) scale(0.982);
+  }
+  58% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(-10px, 0, 0) scale(1.008);
+  }
+  78% {
+    transform: translate3d(4px, 0, 0) scale(0.997);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes screenshot-rubber-prev {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(-48px, 0, 0) scale(0.982);
+  }
+  58% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(10px, 0, 0) scale(1.008);
+  }
+  78% {
+    transform: translate3d(-4px, 0, 0) scale(0.997);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .screenshot-dots {
-  min-height: 16px;
+  min-height: 18px;
 }
 
 .screenshot-dot-button {
-  display: block;
-  width: 12px;
-  height: 12px;
+  position: relative;
+  display: grid;
+  width: 18px;
+  height: 18px;
   flex: 0 0 auto;
+  place-items: center;
   padding: 0;
   overflow: hidden;
-  border: 0;
+  border: 1px solid rgba(20, 71, 230, 0.16);
   border-radius: 999px;
-  background: transparent;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(23, 46, 98, 0.08);
   cursor: pointer;
-  opacity: 0.46;
-  transition: width 0.48s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease,
-    transform 0.36s ease;
+  opacity: 0.54;
+  transition:
+    opacity 0.9s ease,
+    transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.72s ease,
+    box-shadow 0.72s ease;
+}
+
+.screenshot-dot-button::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: inherit;
+  background: rgba(20, 71, 230, 0.08);
+  opacity: 0;
+  transform: scale(1.45);
+  transition: opacity 0.9s ease, transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.screenshot-dot-button::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #1447e6;
+  opacity: 0;
+  transform: scale(0.42);
+  transition: opacity 0.86s ease, transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .screenshot-dot-button:hover,
 .screenshot-dot-button:focus-visible {
-  opacity: 0.82;
+  border-color: rgba(20, 71, 230, 0.34);
+  opacity: 1;
   transform: translateY(-1px);
   outline: none;
 }
 
 .screenshot-dot-button.active {
-  width: 38px;
   opacity: 1;
+  border-color: rgba(20, 71, 230, 0.32);
+  box-shadow: 0 12px 28px rgba(20, 71, 230, 0.14);
+}
+
+.screenshot-dot-button.active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.screenshot-dot-button.active::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .screenshot-dot-button img {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: cover;
-  object-position: center;
+  display: none;
 }
 
 /* Use the supplied footer wordmark while preserving the original footer height. */
