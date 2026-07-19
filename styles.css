@@ -323,8 +323,11 @@ textarea {
 }
 
 .secondary-button {
+  gap: 8px;
+  border: 0;
   color: #000;
   background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
 
 .primary-button:hover,
@@ -336,7 +339,82 @@ textarea {
   position: relative;
   z-index: 3;
   height: 622px;
-  margin-top: 50px;
+  margin-top: 22px;
+}
+
+.demo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(5, 5, 5, 0.46);
+  backdrop-filter: blur(8px);
+}
+
+.demo-modal {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 34px;
+  border: 1px solid rgba(20, 71, 230, 0.14);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 28px 80px rgba(5, 20, 60, 0.24);
+  text-align: left;
+}
+
+.demo-modal h2 {
+  margin: 0 0 22px;
+  color: #050505;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.demo-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  color: #050505;
+  background: #eef3fb;
+  cursor: pointer;
+}
+
+.demo-credentials {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.demo-credentials p {
+  margin: 0;
+  color: #050505;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.demo-credentials span {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.demo-view-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 48px;
+  border-radius: 38px;
+  color: #fff;
+  background: var(--blue);
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .dashboard-glass {
@@ -1659,7 +1737,7 @@ textarea {
 
   .hero-dashboard {
     height: 320px;
-    margin-top: 58px;
+    margin-top: 28px;
   }
 
   .dashboard-glass {

@@ -1,3 +1,5 @@
+import DemoModal from "./DemoModal";
+
 const featureItems = [
   {
     icon: "lead",
@@ -249,10 +251,7 @@ export default function Home() {
             <a href="#contact" className="primary-button">
               Book a Demo
             </a>
-            <a href="#screenshots" className="secondary-button">
-              View Demo
-              <span aria-hidden="true">↗</span>
-            </a>
+            <DemoModal />
           </div>
         </div>
 
