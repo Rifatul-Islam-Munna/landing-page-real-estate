@@ -144,6 +144,12 @@ body {
 
 .screenshot-frame {
   overflow: hidden;
+  background: #fff;
+}
+
+.main-gradient,
+.screenshots-section {
+  background: #fff;
 }
 
 .screenshot-frame img {

@@ -4,43 +4,43 @@ import { useEffect } from "react";
 
 const screenshots = [
   {
-    src: "/sliders/Group%2029066.png",
+    src: "/Website%20elements/Group%2029066.png",
     alt: "Lead CRM dashboard",
     position: "center",
     scale: "1",
   },
   {
-    src: "/sliders/Group%2029067.png",
+    src: "/Website%20elements/Group%2029067.png",
     alt: "Real estate reports dashboard",
     position: "center",
     scale: "1",
   },
   {
-    src: "/sliders/Group%2029068.png",
+    src: "/Website%20elements/Group%2029068.png",
     alt: "Property listings dashboard",
     position: "center",
     scale: "1",
   },
   {
-    src: "/sliders/Group%2029069.png",
+    src: "/Website%20elements/Group%2029069.png",
     alt: "Property chat workspace",
     position: "center",
     scale: "1",
   },
   {
-    src: "/sliders/Group%2029070.png",
+    src: "/Website%20elements/Group%2029070.png",
     alt: "Lead activity workspace",
     position: "center",
     scale: "1",
   },
   {
-    src: "/sliders/Group%2029071.png",
+    src: "/Website%20elements/Group%2029071.png",
     alt: "Real estate document workspace",
     position: "center",
     scale: "1",
   },
   {
-    src: "/sliders/Group%2029072.png",
+    src: "/Website%20elements/Group%2029072.png",
     alt: "Contact management workspace",
     position: "center",
     scale: "1",

@@ -190,8 +190,6 @@ export default function Home() {
   return (
     <div className="site-shell">
       <header className="hero" id="top">
-        <img className="hero-ellipse" src="/Website%20elements/Ellipse%202.png" alt="" aria-hidden="true" />
-
         <nav className="top-nav page-width" aria-label="Primary navigation">
           <a className="brand" href="#top" aria-label="Badal real estate CRM home">
             <img
@@ -251,8 +249,9 @@ export default function Home() {
             <a href="#contact" className="primary-button">
               Book a Demo
             </a>
-            <a href="#features" className="secondary-button">
-              View Features
+            <a href="#screenshots" className="secondary-button">
+              View Demo
+              <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
@@ -372,7 +371,7 @@ export default function Home() {
 
             <div className="screenshot-frame">
               <img
-                src="/sliders/Group%2029066.png"
+                src="/Website%20elements/Group%2029066.png"
                 alt="Lead CRM dashboard"
               />
             </div>

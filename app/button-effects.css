@@ -212,3 +212,81 @@
     transition: none !important;
   }
 }
+
+.dashboard-glass,
+.screenshot-frame,
+.screenshot-dot-button,
+.screenshot-dot-button.active,
+.screenshot-dots span {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.dashboard-glass,
+.screenshot-frame {
+  height: auto !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.screenshot-frame {
+  width: 1300px !important;
+  max-width: 100% !important;
+  margin-inline: auto !important;
+}
+
+.screenshot-frame img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1300 / 640;
+}
+
+.dashboard-glass {
+  width: min(1084px, 100%) !important;
+}
+
+.dashboard-glass img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1084 / 534;
+}
+
+.automation-connectors > .automation-base-path {
+  stroke: rgba(20, 71, 230, 0.22) !important;
+  stroke-width: 3 !important;
+  opacity: 1 !important;
+}
+
+.automation-connectors .automation-beam-path {
+  opacity: 0.95 !important;
+}
+
+.hero {
+  background: url("/Website%20elements/Ellipse%201.png") center top / 100% 100% no-repeat, #fff !important;
+}
+
+.hero-ellipse {
+  display: none !important;
+}
+
+.secondary-button {
+  gap: 10px;
+}
+
+.secondary-button span {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: #1447e6;
+  line-height: 1;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.secondary-button:hover span,
+.secondary-button:focus-visible span {
+  transform: translate(2px, -2px);
+}

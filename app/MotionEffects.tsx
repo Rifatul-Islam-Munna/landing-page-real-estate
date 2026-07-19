@@ -167,9 +167,9 @@ export default function MotionEffects() {
 
     if (automationDiagram && connectorPaths.length) {
       connectorPaths.forEach((path) => {
-        track(animate(path, { pathLength: 0, opacity: 0.18 }, { duration: 0 }));
+        track(animate(path, { pathLength: 1, opacity: 1 }, { duration: 0 }));
       });
-      if (beamGroup) track(animate(beamGroup, { opacity: 0 }, { duration: 0 }));
+      if (beamGroup) track(animate(beamGroup, { opacity: 1 }, { duration: 0 }));
 
       let hasAnimated = false;
       observers.push(
