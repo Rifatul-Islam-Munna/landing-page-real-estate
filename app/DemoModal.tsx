@@ -1,11 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 const demoUrl = "https://test-project-frontend-propraty.slsqyw.easypanel.host/";
 
 export default function DemoModal() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -25,7 +31,8 @@ export default function DemoModal() {
         <span aria-hidden="true">&#8599;</span>
       </button>
 
-      {open ? (
+      {mounted && open
+        ? createPortal(
         <div className="demo-modal-backdrop" role="presentation" onClick={() => setOpen(false)}>
           <div
             className="demo-modal"
@@ -40,23 +47,28 @@ export default function DemoModal() {
               aria-label="Close demo login modal"
               onClick={() => setOpen(false)}
             >
-              x
+              &times;
             </button>
             <h2 id="demo-modal-title">Demo Login</h2>
+            <p className="demo-modal-subtitle">Use these credentials to preview dashboard.</p>
             <div className="demo-credentials">
               <p>
-                <span>email:</span> test@gmail.com
+                <span>Email</span>
+                <strong>test@gmail.com</strong>
               </p>
               <p>
-                <span>password:</span> 11111111
+                <span>Password</span>
+                <strong>11111111</strong>
               </p>
             </div>
             <a className="demo-view-button" href={demoUrl}>
               View
             </a>
           </div>
-        </div>
-      ) : null}
+        </div>,
+          document.body,
+        )
+        : null}
     </>
   );
 }
